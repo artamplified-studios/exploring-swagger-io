@@ -1,0 +1,177 @@
+# REST API specification experiment
+# Purpose of this micro experiment is to:
+# 1: document current existing RESTapi specifications 
+# 2: Design future RESTapi via swagger.io and then generate server file based on .yaml/.json file
+
+# This file contains examples of
+# - GET:/objects
+# - GET:/objects/object_id
+# - GET:/field-definitions
+# - GET:/field-definitions/field-definition_id
+#
+# as wel as an example of nested records
+
+# GET THIS **** rollin ( how to )
+# You can copy paste or drag this .yaml file onto the editor.swagger
+# The editor will auto generate the document
+
+# info:
+# Dr.foo: Kiran Mertopawiro
+# 
+# resources:
+# http://swagger.io
+# http://editor.swagger.io/#/
+# http://swagger.io/specification/
+
+swagger: '2.0'
+
+info:
+  version: '0.1.0'
+  title: 'REST API specifications experiment'
+host: pim.brandifyer.dev
+basePath: /pim_backend
+
+paths:
+  # GET:/objects
+  /objects:
+    get:
+      tags:
+        - objects
+      description:
+        request available objects
+      produces:
+        - application/json
+      #expected responses for this operation
+      responses:
+        '200':
+          description: GET:/objects successful
+          schema:
+            #reference to object model
+            $ref: '#/definitions/object'
+
+  # GET:/objects/object_id
+  /objects/{id}:
+    get:
+      tags:
+        - object
+      description:
+        request single object record
+      produces:
+        - application/json
+      parameters:
+        - 
+          name: id
+          in: path
+          description: ID of object to fetch
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: object response
+          schema:
+            $ref: '#/definitions/object'
+        '500':
+          description: Request processing failed
+
+  # GET:/field-definitions
+  /field-definitions:
+    get:
+      tags:
+        - field-definitions
+      description:
+        request all field-definitions
+      produces:
+        - application/json
+      # expected responses for this operation
+      responses:
+        '200':
+          description: GET:/field-definitions successful
+          schema:
+            #reference to field-definitions model
+            $ref: '#/definitions/field-definition'
+        '500':
+          description: Request processing failed
+
+
+
+#model definitions for each endpoints
+definitions:
+  # model for object 
+  object:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      objectType: 
+        type: integer
+        format: int64
+      name:
+        type: string
+      code:
+        type: string
+      status:
+        type: string
+      customerid:
+        type: integer
+        format: int64
+      modificationDate:
+        type: string
+        format: date-time
+      childObjectsCount:
+        type: integer
+        format: int64
+      links:
+        type: object
+        properties:
+          fieldgroups:
+            type: string
+          childTableObjects:
+            type: string
+          parentHierarchies:
+            type: string
+          childHierarchies:
+            type: string
+          fieldValues:
+            type: string
+          attachments:
+            type: string
+  # end model for object 
+
+  # model for field-definitions
+  field-definition:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      customerid:
+        type: string
+      name:
+        type: string
+      code:
+        type: string
+      format:
+        type: string
+      info:
+        type: string
+      fieldType:
+        type: integer
+        format: int64
+      translatable:
+        type: boolean
+      editable:
+        type: boolean
+      fieldSelect:
+        type: integer
+        format: int64
+      measurementUnit:
+        type: integer
+        format: int64
+      links:
+        type: object
+        properties:
+          fieldSelectOptions:
+            type: string
+  # end model for field-definitions

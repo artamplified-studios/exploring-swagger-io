@@ -1,0 +1,15 @@
+{
+  "name": "swagger-experimental",
+  "version": "1.0.0",
+  "description": "exploring swagger features",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kiran Mertopawiro",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-convert": "^0.1.12"
+  }
+}

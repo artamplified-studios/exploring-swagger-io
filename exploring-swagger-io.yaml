@@ -28,8 +28,8 @@ swagger: '2.0'
 info:
   version: '0.1.0'
   title: 'REST API specifications experiment'
-host: pim.brandifyer.dev
-basePath: /pim_backend
+host: <url-to-webserver>
+basePath: <basepath>
 
 paths:
   # GET:/objects
